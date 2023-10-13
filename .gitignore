@@ -1,0 +1,6 @@
+__pycache__/
+*.env*
+wandb/
+outputs/
+data_hub/
+runs/

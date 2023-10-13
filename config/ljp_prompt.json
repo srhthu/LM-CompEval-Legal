@@ -1,0 +1,7 @@
+{
+    "instruction_free_zs": "根据中国刑法判断犯罪嫌疑人的罪名，直接输出罪名。",
+    "instruction_free_fs": "根据中国刑法判断犯罪嫌疑人的罪名",
+    "instruction_multi_zs": "根据中国刑法判断犯罪嫌疑人的罪名",
+    "instruction_multi_fs": "根据中国刑法判断犯罪嫌疑人的罪名",
+    "demo_template": "案件事实: {input}\n罪名: {output}"
+}

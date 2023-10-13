@@ -1,0 +1,19 @@
+{
+    "model_config": {
+        "base_model": "THUDM/chatglm-6b",
+        "trust_remote_code": true,
+        "save_memory": true
+    },
+    "gen_config": {
+        "num_return_sequences": 5,
+        "max_new_tokens": 30,
+        "temperature": 0.8,
+        "do_sample": true
+    },
+    "task_config": {
+        "data_path": "./data_hub/ljp",
+        "prompt_config_file": "./config/ljp_prompt.json",
+        "query_max_len": 1000,
+        "demo_max_len": 500
+    }
+}
