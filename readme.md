@@ -1,6 +1,53 @@
-# A Comprehensive Evaluation of Large Language Models on Legal Judgment Prediction
+<h1 align="center">
+⚖️<img src="./docs/static/images/tora_logo.png" width="100" alt="" />
+<br>
+A Comprehensive Evaluation of LLMs on 
+<br> Legal Judgment Prediction
+</h1>
 
-## Leaderboard
+<div align="center">
+
+![](https://img.shields.io/badge/Task-Text%20Classification-orange)
+![](https://img.shields.io/badge/Code%20License-MIT-green)
+</div>
+
+<p align="center">
+  <a href="https://srhthu.github.io/LM-CompEval-Legal/"><b>[🌐 Website]</b></a> •
+  <a href="https://arxiv.org"><b>[📜 Paper]</b></a> •
+  <a href="https://github.com/srhthu/LM-CompEval-Legal"><b>[🐱 GitHub]</b></a>
+  <br>
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#%EF%B8%8F-citation">Citation</a>
+</p>
+
+<p align="center">
+Repo for "<a href="https://arxiv.org/abs/" target="_blank">A Comprehensive Evaluation of Large Language Models on Legal Judgment Prediction</a>" <br> published at <b>EMNLP Findings 2023</b>
+</p>
+
+## 💡 Introduction
+To comprehensively evaluate the law capacity of large language models, we propose baseline solutions and conduct evaluation on the task of *legal judgment prediction*.
+
+**Motivation**  
+Existing benchmarks, e.g., [lm_eval_harness](https://github.com/EleutherAI/lm-evaluation-harness), mainly adopt a **perplexity**-based approach to select the most possible options as the prediction for classification tasks. *However*, LMs typically interact with humans in the way of open-ended generation. It is critical to directly evaluate the generated contents by greedy decoding or sampling.
+
+**Evaluation on LM Generated Contents**  
+We propose an automatic evaluation pipeline to directly evaluate the generated contents for **classification** tasks. 
+1. Given prompts with task instructions, LMs are expected to generate class labels. The generated contents may not strictly match standard label names.
+2. Then, a parser is to map generated contents to labels, based on the text similarity scores.
+
+**LM + Retrieval System**  
+
+To address the performance with retrievad information of LMs in legal domain, additional information, e.g., label candidates and similar cases as demonstrations, are included into prompts. Considering the combination of the two additional information, there are four sub-settings of prompts: 
+- (**free, zero shot**): No additional information. Only task instruction.
+- (**free, few shot**): Task instruction + demonstrations
+- (**multi, zero shot**): Task instruction + label candidates (options)
+- (**multi, few shot**): Task instruction + label candidates + demonstrations
+
+
+<iframe src="resources/static/fig_setting_example_v2.pdf"> </iframe>
+
+
+## 🔥 Leaderboard
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: center;">
@@ -101,7 +148,7 @@
 
 ## Download data
 
-## Usage
+## 🚀 Quick Start
 ### Evaluate Huggingface models:
 To evaluate a huggingface model on all 10 sub settings (`{free,multi}-{0..54
 CUDA_VISIBLE_DEVICES=0 python main.py \
@@ -137,6 +184,9 @@ The huggingface paths of the evaluated models in the paper are
 ```
 python scripts/get_result_table.py --exp_dir runs/paper_version --metric f1  --save_path resources/paper_version_f1.csv
 ```
+
+## Citation
+
 ## Tests
 Test the model
 ```Bash
