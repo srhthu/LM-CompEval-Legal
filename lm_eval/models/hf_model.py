@@ -12,14 +12,12 @@ class HF_Model_Config:
     Args:
         base_model: the name or path of the base model
         peft_model: model_id of peft model
-        is_seq2seq: whether base model is seq2seq or causal lm
         trust_remote_code: should be true if using third-party models
         device_map: default to 'auto' to distribute parameters among all gpus
         save_memory: If true, generate one output each time. Otherwise decode multiple outputs together
     """
     base_model: str = None
     peft_model: str = None
-    is_seq2seq: bool = False
     trust_remote_code: bool = False
     torch_dtype: Union[str, torch.dtype] = torch.float16
     device_map: Union[str, Dict] = 'auto'

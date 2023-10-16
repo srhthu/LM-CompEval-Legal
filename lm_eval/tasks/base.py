@@ -1,6 +1,6 @@
 import json
 from typing import Dict, Any, List
-from transformers import PreTrainedTokenizer
+from transformers import PreTrainedTokenizer, PreTrainedTokenizerFast
 from tiktoken import Encoding
 
 class TaskBase:
@@ -25,7 +25,7 @@ class TaskBase:
     def cut_text(self, text, max_len):
         """Truncate text to max length"""
         tokenizer = self.tokenizer
-        if isinstance(tokenizer, PreTrainedTokenizer):
+        if isinstance(tokenizer, (PreTrainedTokenizer, PreTrainedTokenizerFast)):
             # handle transformers tokenizer
             outs = tokenizer(text, truncation = True, max_length = max_len)
             new_text = tokenizer.decode(
