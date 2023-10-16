@@ -43,11 +43,14 @@ To address the performance with retrievad information of LMs in legal domain, ad
 - (**multi, zero shot**): Task instruction + label candidates (options)
 - (**multi, few shot**): Task instruction + label candidates + demonstrations
 
+<p align="center">
+<img src="resources/static/fig_setting_example_v2.jpg" alt="setting" width="50%" />
+<p>
 
-<iframe src="resources/static/fig_setting_example_v2.pdf"> </iframe>
 
 
 ## 🔥 Leaderboard
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: center;">
@@ -145,27 +148,54 @@ To address the performance with retrievad information of LMs in legal domain, ad
   </tbody>
 </table>
 
-
-## Download data
+Note:
+- **Metric**: Macro-F1
+- $score = (free\text{-}0shot + free\text{-}2shot + multi\text{-}0shot + multi\text{-}2shot)/4$
+- OpenAI model names: *gpt-3.5-turbo-0301*, *gpt-4-0314*
 
 ## 🚀 Quick Start
-### Evaluate Huggingface models:
-To evaluate a huggingface model on all 10 sub settings (`{free,multi}-{0..54
+### Download Repo and Data
+```Bash
+git clone https://github.com/srhthu/LM-CompEval-Legal.git
+# Enter the repo
+cd LM-CompEval-Legal
+bash download_data.sh
+# Evaluation dataset will be downloaded to data_hub/ljp
+# Model generated results will be downloaded to runs/paper_version
+```
+### Evaluate Other Models
+
+There are totally 10 `sub_tasks`: `{free,multi}-{0..5}`.
+
+Evaluate a **huggingface** model on all sub_tasks:
+```Bash
 CUDA_VISIBLE_DEVICES=0 python main.py \
 --config ./config/default_hf.json \
---output_dir ./runs/<model_name> \
+--output_dir ./runs/test/<model_name> \
 --model_type hf \
 --model <path of model>
 ```
-To evaluate some of the whole settings, add one more argument:
+
+Evaluate a **OpenAI** model on all sub_tasks:
+```Bash
+CUDA_VISIBLE_DEVICES=0 python main.py \
+--config ./config/default_openai.json \
+--output_dir ./runs/test/<model_name> \
+--model_type openai \
+--model <path of model>
+```
+
+To evaluate some of the whole settings, add one more argument, e.g.,
 ```Bash
 --sub_tasks 'free-0shot,free-2shot,multi-0shot,multi-2shot'
 ```
+
 The huggingface paths of the evaluated models in the paper are
--  ChatGLM: `THUDM/chatglm-6b` (add `--is_seq2seq`)
+-  ChatGLM: `THUDM/chatglm-6b`
 -  BLOOMZ: `bigscience/bloomz-7b1-mt`
 -  Vicuna: `lmsys/vicuna-13b-delta-v1.1`
 
+**Features**:
 > - If the evaluation process is interupted, just run it again with the same parameters. The process saves model outputs immediately and will skip previous finished samples when resuming.  
 > - Samples that trigger a GPU out-of-memory error will be skipped. You can change the configurations and run the process again. (See suggested GPU configurations below)
 
@@ -178,15 +208,19 @@ The huggingface paths of the evaluated models in the paper are
   - If total RAM>=**64G**, e.g., 3\*RTX3090 or 2\*V100, add the `--speed` argument for faster inference
 > When context is long, e.g., in multi-4shot setting, 1 GPU of 24G RAM may be insufficient for 7B model. You have to eigher increase the number of GPUs or decrease the demonstration length (default to 500) by modifying the *demo_max_len* parameter in `config/default_hf.json`
 
-### Evaluate OpenAI Models via API
-
 ### Create Result table
-```
-python scripts/get_result_table.py --exp_dir runs/paper_version --metric f1  --save_path resources/paper_version_f1.csv
+After evaluating some models locally, the leaderboard can be generated in csv format:
+
+```Bash
+python scripts/get_result_table.py \
+--exp_dir runs/paper_version \
+--metric f1  \
+--save_path resources/paper_version_f1.csv
 ```
 
 ## Citation
 
+<!-- 
 ## Tests
 Test the model
 ```Bash
@@ -209,4 +243,4 @@ CUDA_VISIBLE_DEVICES=3 python main.py \
 --output_dir ./runs/baichuan_7b \
 --model_type hf \
 --model /storage/rhshui/ssd/llm/baichuan-7b
-```
+``` -->
