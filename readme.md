@@ -154,20 +154,26 @@ Note:
 - OpenAI model names: *gpt-3.5-turbo-0301*, *gpt-4-0314*
 
 ## 🚀 Quick Start
-### Download Repo and Data
+### ⚙️ Install
 ```Bash
 git clone https://github.com/srhthu/LM-CompEval-Legal.git
+
 # Enter the repo
 cd LM-CompEval-Legal
+
+pip install -r requirements.txt
+
 bash download_data.sh
-# Evaluation dataset will be downloaded to data_hub/ljp
-# Model generated results will be downloaded to runs/paper_version
+# Download evaluation dataset to data_hub/ljp
+# Download model generated results to runs/paper_version
 ```
-### Evaluate Other Models
+The data is availabel at [Google Drive](https://drive.google.com/drive/folders/1UWi9F4vtBORsnCUqDDkyehdH4IyDfnME?usp=share_link)
 
-There are totally 10 `sub_tasks`: `{free,multi}-{0..5}`.
+### Evaluate Models
 
-Evaluate a **huggingface** model on all sub_tasks:
+There are totally 10 `sub_tasks`: `{free,multi}-{0..4}`.
+
+Evaluate a **Huggingface** model on all sub_tasks:
 ```Bash
 CUDA_VISIBLE_DEVICES=0 python main.py \
 --config ./config/default_hf.json \

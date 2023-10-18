@@ -4,7 +4,7 @@ fi
 
 # compress eval data into tar.gz
 cd data_hub
-tar czvf ljp_data.tar.gz ljp
+[ -d "ljp" ] && tar czvf ljp_data.tar.gz ljp || echo "Error: no ljp folder"
 
 cd ../runs
-tar czvf paper_version.tar.gz paper_version
+[ -d "paper_version" ] && tar czvf paper_version.tar.gz paper_version || echo "Error: no paper_version"
