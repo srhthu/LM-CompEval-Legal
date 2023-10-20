@@ -21,7 +21,7 @@ A Comprehensive Evaluation of LLMs on
 </p>
 
 <p align="center">
-Repo for "<a href="https://arxiv.org/abs/" target="_blank">A Comprehensive Evaluation of Large Language Models on Legal Judgment Prediction</a>" <br> published at <b>EMNLP Findings 2023</b>
+Repo for "<a href="https://arxiv.org/abs/2310.11761" target="_blank">A Comprehensive Evaluation of Large Language Models on Legal Judgment Prediction</a>" <br> published at <b>EMNLP Findings 2023</b>
 </p>
 
 ## 💡 Introduction
@@ -37,7 +37,7 @@ We propose an automatic evaluation pipeline to directly evaluate the generated c
 
 **LM + Retrieval System**  
 
-To address the performance with retrievad information of LMs in legal domain, additional information, e.g., label candidates and similar cases as demonstrations, are included into prompts. Considering the combination of the two additional information, there are four sub-settings of prompts: 
+To address the performance with retrieved information of LMs in legal domain, additional information, e.g., label candidates and similar cases as demonstrations, are included into prompts. Considering the combination of the two additional information, there are four sub-settings of prompts: 
 - (**free, zero shot**): No additional information. Only task instruction.
 - (**free, few shot**): Task instruction + demonstrations
 - (**multi, zero shot**): Task instruction + label candidates (options)
